@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>DueWork | Your Digital Job Shop</title>
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
+</head>
+
+
+<body>
+
+  <!-- ========================================
+       HEADER
+  ========================================= -->
+
+  <header class="site-header">
+
+    <div class="header-inner">
+
+      <a
+        href="#"
+        class="logo"
+      >
+        Due<span>Work</span>
+      </a>
+
+      <div class="header-tagline">
+        Your Digital Job Shop
+      </div>
+
+    </div>
+
+  </header>
+
+
+
+  <!-- ========================================
+       MAIN
+  ========================================= -->
+
+  <main class="main-container">
+
+
+    <!-- ========================================
+         HERO
+    ========================================= -->
+
+    <section class="hero">
+
+      <div class="eyebrow">
+        ON-DEMAND DIGITAL PRODUCTION
+      </div>
+
+      <h1>
+        What do you need
+        <span>done?</span>
+      </h1>
+
+      <p class="hero-description">
+        Describe the digital work you need completed,
+        choose your deadline, and get an instant quote.
+      </p>
+
+    </section>
+
+
+
+    <!-- ========================================
+         JOB REQUEST
+    ========================================= -->
+
+    <section class="quote-builder">
+
+      <form
+        id="quoteForm"
+        class="quote-form"
+      >
+
+        <div class="form-group">
+
+          <label for="jobRequest">
+            Describe the job
+          </label>
+
+          <textarea
+            id="jobRequest"
+            placeholder="Example: Research 50 machine shops in Wisconsin and give me an Excel file with the company name, owner, website, capabilities and estimated employee count."
+            required
+          ></textarea>
+
+          <div class="input-footer">
+
+            <span>
+              Be as specific as you can.
+            </span>
+
+            <span id="characterCount">
+              0 characters
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+             DEADLINE
+        ========================================= -->
+
+        <div class="deadline-section">
+
+          <div class="section-label">
+            When do you need it?
+          </div>
+
+          <div class="deadline-options">
+
+
+            <label class="deadline-card">
+
+              <input
+                type="radio"
+                name="deadline"
+                value="standard"
+                checked
+              >
+
+              <span class="deadline-content">
+
+                <strong>
+                  Standard
+                </strong>
+
+                <small>
+                  3+ days
+                </small>
+
+              </span>
+
+            </label>
+
+
+
+            <label class="deadline-card">
+
+              <input
+                type="radio"
+                name="deadline"
+                value="priority"
+              >
+
+              <span class="deadline-content">
+
+                <strong>
+                  Priority
+                </strong>
+
+                <small>
+                  1–3 days
+                </small>
+
+              </span>
+
+            </label>
+
+
+
+            <label class="deadline-card">
+
+              <input
+                type="radio"
+                name="deadline"
+                value="rush"
+              >
+
+              <span class="deadline-content">
+
+                <strong>
+                  Rush
+                </strong>
+
+                <small>
+                  8–24 hours
+                </small>
+
+              </span>
+
+            </label>
+
+
+
+            <label class="deadline-card">
+
+              <input
+                type="radio"
+                name="deadline"
+                value="emergency"
+              >
+
+              <span class="deadline-content">
+
+                <strong>
+                  Emergency
+                </strong>
+
+                <small>
+                  Under 8 hours
+                </small>
+
+              </span>
+
+            </label>
+
+
+          </div>
+
+        </div>
+
+
+
+        <!-- ========================================
+             SUBMIT
+        ========================================= -->
+
+        <button
+          type="submit"
+          class="analyze-button"
+          id="analyzeButton"
+        >
+
+          Analyze Job
+
+          <span>
+            →
+          </span>
+
+        </button>
+
+
+      </form>
+
+    </section>
+
+
+
+    <!-- ========================================
+         ANALYZING STATE
+    ========================================= -->
+
+    <section
+      id="analysisPanel"
+      class="analysis-panel hidden"
+    >
+
+      <div class="analysis-header">
+
+        <div class="analysis-spinner"></div>
+
+        <div>
+
+          <strong>
+            Analyzing your job
+          </strong>
+
+          <p id="analysisMessage">
+            Understanding scope...
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="analysis-progress">
+
+        <div
+          id="analysisProgressBar"
+          class="analysis-progress-bar"
+        ></div>
+
+      </div>
+
+    </section>
+
+<!-- ========================================
+     CLARIFICATION RESULT
+========================================= -->
+
+<section
+  id="clarificationPanel"
+  class="quote-result hidden"
+>
+
+  <div class="quote-result-header">
+
+    <div>
+
+      <div class="eyebrow">
+        MORE INFORMATION NEEDED
+      </div>
+
+      <h2>
+        We need a little more detail.
+      </h2>
+
+    </div>
+
+    <div class="status-badge clarification-badge">
+      NEEDS CLARIFICATION
+    </div>
+
+  </div>
+
+
+  <p class="clarification-description">
+    DueWork needs a clearer scope before it can give you a reliable price.
+  </p>
+
+
+  <div
+    id="clarificationQuestions"
+    class="clarification-questions"
+  ></div>
+
+
+  <button
+    id="editRequestButton"
+    class="start-job-button"
+    type="button"
+  >
+    Add More Detail
+  </button>
+
+</section>
+
+<!-- ========================================
+     CANNOT FULFILL
+========================================= -->
+
+<section
+  id="cannotFulfillPanel"
+  class="quote-result hidden"
+>
+
+  <div class="quote-result-header">
+
+    <div>
+
+      <div class="eyebrow">
+        REQUEST NOT SUPPORTED
+      </div>
+
+      <h2>
+        DueWork can't take this job.
+      </h2>
+
+    </div>
+
+    <div class="status-badge cannot-fulfill-badge">
+      CANNOT FULFILL
+    </div>
+
+  </div>
+
+
+  <p class="clarification-description">
+    This request falls outside the type of digital work DueWork can safely complete.
+  </p>
+
+
+  <div
+    id="cannotFulfillReasons"
+    class="clarification-questions"
+  ></div>
+
+
+  <button
+    id="reviseBlockedRequestButton"
+    class="start-job-button"
+    type="button"
+  >
+    Revise Request
+  </button>
+
+</section>
+
+    <!-- ========================================
+         QUOTE RESULT
+    ========================================= -->
+
+    <section
+      id="quoteResult"
+      class="quote-result hidden"
+    >
+
+
+      <div class="quote-result-header">
+
+        <div>
+
+          <div class="eyebrow">
+            DUEWORK QUOTE
+          </div>
+
+          <h2 id="quoteJobName">
+            Digital Job
+          </h2>
+
+        </div>
+
+
+        <div
+          id="quoteStatus"
+          class="status-badge"
+        >
+          READY
+        </div>
+
+      </div>
+
+
+
+      <!-- PRICE -->
+
+      <div class="price-area">
+
+        <span class="price-label">
+          Your price
+        </span>
+
+        <div
+          id="customerPrice"
+          class="customer-price"
+        >
+          $0
+        </div>
+
+        <span class="price-caption">
+          One-time price
+        </span>
+
+      </div>
+
+
+
+      <!-- JOB DETAILS -->
+
+      <div class="quote-details">
+
+        <div class="quote-detail">
+
+          <span class="detail-label">
+            Deadline
+          </span>
+
+          <strong id="quoteDeadline">
+            Standard
+          </strong>
+
+        </div>
+
+
+        <div class="quote-detail">
+
+          <span class="detail-label">
+            Fulfillment
+          </span>
+
+          <strong id="quoteFulfillment">
+            AI + QA
+          </strong>
+
+        </div>
+
+
+        <div class="quote-detail">
+
+          <span class="detail-label">
+            Estimated scope
+          </span>
+
+          <strong id="quoteComplexity">
+            Standard
+          </strong>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- DELIVERABLES -->
+
+      <div class="deliverables">
+
+        <h3>
+          Your order includes
+        </h3>
+
+        <div
+          id="deliverablesList"
+          class="deliverables-list"
+        ></div>
+
+      </div>
+
+
+
+      <!-- ACTIONS -->
+
+      <div class="quote-actions">
+
+        <button
+          id="startJobButton"
+          class="start-job-button"
+          type="button"
+        >
+          Start Job
+        </button>
+
+
+        <button
+          id="newQuoteButton"
+          class="new-quote-button"
+          type="button"
+        >
+          New Quote
+        </button>
+
+      </div>
+
+
+      <!-- INTERNAL DEV DATA -->
+
+      <details class="developer-panel">
+
+        <summary>
+          Developer Quote Data
+        </summary>
+
+        <pre id="developerQuoteData"></pre>
+
+      </details>
+
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- ========================================
+       SCRIPT ORDER MATTERS
+
+       quoteEngine.js FIRST
+       app.js SECOND
+  ========================================= -->
+
+  <script src="js/quote-engine.js"></script>
+<script src="js/app.js"></script>
+
+</body>
+
+</html>
